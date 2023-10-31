@@ -41,20 +41,19 @@ async function getPriceCoinsGraphic(url) {
   let responseG = await fetch(url);
   let returnApiG = await responseG.json();
   let selectListQuotationsG = returnApiG.bpi;
-
-  if (returnApiG.bpi && typeof returnApiG.bpi === 'object') {
-    const queryCoinsListG = Object.keys(selectListQuotationsG).map((key)=> {
-        selectListQuotationsG[key]
-        let dataG = queryCoinsListG;
-        return dataG;
-    })
-  }
+  //if (returnApiG.bpi && typeof returnApiG.bpi === 'object') {
+    const queryCoinsList = Object.keys(selectListQuotationsG).map((key)=> {
+      return selectListQuotationsG[key]
+    });
+    let dataG = queryCoinsList;
+    return dataG;
+  //}
 }
 
 export default function App() {
   const[coinsList, setCoinsList] = useState([]);
   const[coinsGraphicList, setCoinsGraphicList] = useState([0]);
-  const[days, setDays] = useState(720);
+  const[days, setDays] = useState(1220);
   const[updateData, setUpdateData] = useState(true);
   
   function updateDay(number){
@@ -84,7 +83,7 @@ export default function App() {
         backgroundColor="#f50d41"
       />
       <CurrentPrice />
-      <HistoryGraphic />
+      <HistoryGraphic infoDataGraphic={coinsGraphicList}/>
       <QuotationList filterDay={updateDay} listTransactions={coinsList}/>
     </SafeAreaView>
   )
