@@ -3,7 +3,6 @@ import { StyleSheet, Text, StatusBar, SafeAreaView, Platform } from "react-nativ
 import { CurrentPrice } from "./src/components/CurrentPrice";
 import { HistoryGraphic } from "./src/components/HistoryGraphic";
 import { QuotationList } from "./src/components/QuotationList";
-import QuotationItems from "./src/components/QuotationList/QuotationItems";
 
 function addZero(number){
   if(number <= 9){
