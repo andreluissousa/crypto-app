@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     },
     dayCotation: {
         fontSize: 16,
-        paddginLeft: 2,
         color: "#ffffff",
         fontWeight: "bold"
     },
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
     logoBitcoin: {
         width: 40,
         height: 40,
-        marginLeft: 2,
+       marginLeft: 2,
     },
     boxLogo: {
         flexDirection: "row",

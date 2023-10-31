@@ -9,6 +9,7 @@ function addZero(number){
   if(number <= 9){
     return "0" + number;
   }
+  return number
 }
 
 function url(qtdDays) {
@@ -42,18 +43,19 @@ async function getPriceCoinsGraphic(url) {
   let returnApiG = await responseG.json();
   let selectListQuotationsG = returnApiG.bpi;
 
-  const queryCoinsListG = Object.keys(selectListQuotationsG).map((key)=> {
-      selectListQuotationsG[key]
-  })
-
-  let dataG = queryCoinsListG();
-  return dataG;
+  if (returnApiG.bpi && typeof returnApiG.bpi === 'object') {
+    const queryCoinsListG = Object.keys(selectListQuotationsG).map((key)=> {
+        selectListQuotationsG[key]
+        let dataG = queryCoinsListG;
+        return dataG;
+    })
+  }
 }
 
 export default function App() {
   const[coinsList, setCoinsList] = useState([]);
   const[coinsGraphicList, setCoinsGraphicList] = useState([0]);
-  const[days, setDays] = useState(30);
+  const[days, setDays] = useState(720);
   const[updateData, setUpdateData] = useState(true);
   
   function updateDay(number){
@@ -84,8 +86,7 @@ export default function App() {
       />
       <CurrentPrice />
       <HistoryGraphic />
-      <QuotationList />
-      <QuotationItems />
+      <QuotationList filterDay={updateDay} listTransactions={coinsList}/>
     </SafeAreaView>
   )
 }
