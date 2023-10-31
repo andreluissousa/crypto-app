@@ -41,13 +41,13 @@ async function getPriceCoinsGraphic(url) {
   let responseG = await fetch(url);
   let returnApiG = await responseG.json();
   let selectListQuotationsG = returnApiG.bpi;
-  //if (returnApiG.bpi && typeof returnApiG.bpi === 'object') {
+  if (returnApiG.bpi && typeof returnApiG.bpi === 'object') {
     const queryCoinsList = Object.keys(selectListQuotationsG).map((key)=> {
       return selectListQuotationsG[key]
     });
     let dataG = queryCoinsList;
     return dataG;
-  //}
+  }
 }
 
 export default function App() {
@@ -55,10 +55,15 @@ export default function App() {
   const[coinsGraphicList, setCoinsGraphicList] = useState([0]);
   const[days, setDays] = useState(1220);
   const[updateData, setUpdateData] = useState(true);
+  const[price, setPrice] = useState();
   
   function updateDay(number){
     setDays(number);
     setUpdateData(true);
+  }
+
+  function priceContation() {
+    setPrice(coinsGraphicList.pop())
   }
 
   useEffect(() => {
@@ -69,6 +74,8 @@ export default function App() {
     getPriceCoinsGraphic(url(days)).then((dataG) => {
       setCoinsGraphicList(dataG);
     });
+
+    priceContation();
 
     if(updateData){
       setUpdateData(false)
@@ -82,7 +89,7 @@ export default function App() {
       <StatusBar 
         backgroundColor="#f50d41"
       />
-      <CurrentPrice />
+      <CurrentPrice lastCotation={price}/>
       <HistoryGraphic infoDataGraphic={coinsGraphicList}/>
       <QuotationList filterDay={updateDay} listTransactions={coinsList}/>
     </SafeAreaView>
