@@ -21,9 +21,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
-      },
-      "package": "com.dolarhoje.dolarcotation",
-      "versionCode": 1
+      }
     },
     "extra": {
       "eas": {
