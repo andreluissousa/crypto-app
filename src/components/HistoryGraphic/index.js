@@ -27,7 +27,7 @@ export function HistoryGraphic(props) {
                 backgroundGradientFrom: "#1E2923",
                 backgroundGradientTo: "#08130D",
                 backgroundGradientToOpacity: 0.5,
-                decimalPlaces: 2,
+                decimalPlaces: 3,
                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 style: {

@@ -20,9 +20,8 @@ async function getListCoins(url) {
     const date = new Date(0);
     date.setUTCSeconds(cotation.timestamp);
     queryCoinsList.push({
-      valor: cotation.bid,
+      valor: parseFloat(cotation.bid).toFixed(3),
       data: formatDate(date),
-      pctChange: cotation.pctChange,
     });
   }
 
@@ -43,7 +42,7 @@ async function getPriceCoinsGraphic(url) {
   let returnApiG = await responseG.json();
   let selectListQuotationsG = returnApiG;
   if (Array.isArray(returnApiG) && selectListQuotationsG.length > 0) {
-    const queryCoinsListG = returnApiG.map((cotation) => cotation.bid);
+    const queryCoinsListG = returnApiG.map((cotation) => parseFloat(cotation.bid).toFixed(3));
     return queryCoinsListG.reverse();
   } else {
     console.error("API response does not contain valid data.");

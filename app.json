@@ -4,10 +4,10 @@
     "slug": "crypto-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.jpg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.jpg",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -19,11 +19,16 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.jpg",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
       "package": "com.dolarhoje.dolarcotation",
       "versionCode": 1
+    },
+    "extra": {
+      "eas": {
+        "projectId": "35756a2d-82f5-4601-bb44-1d8fa42dacb3"
+      }
     }
   }
 }
