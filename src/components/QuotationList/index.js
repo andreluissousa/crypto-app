@@ -10,27 +10,27 @@ export function QuotationList(props) {
             <View style={styles.filters}>
                 <TouchableOpacity
                     style={styles.buttonQuery}
-                    onPress={() => daysQuery(720)}
+                    onPress={() => daysQuery(7)}
                 >
-                    <Text style={styles.textButtonQuery}>2 Years</Text>
+                    <Text style={styles.textButtonQuery}>7D</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonQuery}
-                    onPress={() => daysQuery(1080)}
+                    onPress={() => daysQuery(30)}
                 >
-                    <Text style={styles.textButtonQuery}>3 Years</Text>
+                    <Text style={styles.textButtonQuery}>1M</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonQuery}
-                    onPress={() => daysQuery(1440)}
+                    onPress={() => daysQuery(90)}
                 >
-                    <Text style={styles.textButtonQuery}>4 Years</Text>
+                    <Text style={styles.textButtonQuery}>3M</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonQuery}
-                    onPress={() => daysQuery(800)}
+                    onPress={() => daysQuery(180)}
                 >
-                    <Text style={styles.textButtonQuery}>5 Years</Text>
+                    <Text style={styles.textButtonQuery}>6M</Text>
                 </TouchableOpacity>
             </View>
                 <FlatList 

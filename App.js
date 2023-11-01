@@ -1,97 +1,105 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, StatusBar, SafeAreaView, Platform } from "react-native";
+import { StyleSheet, Text, StatusBar, SafeAreaView, Platform, ActivityIndicator } from "react-native";
 import { CurrentPrice } from "./src/components/CurrentPrice";
 import { HistoryGraphic } from "./src/components/HistoryGraphic";
 import { QuotationList } from "./src/components/QuotationList";
 
-function addZero(number){
-  if(number <= 9){
-    return "0" + number;
-  }
-  return number
-}
-
 function url(qtdDays) {
-  const date = new Date();
-  const listLastDays = qtdDays;
-  const end_date = `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`;
-  date.setDate(date.getDate() - listLastDays);
-  const start_date = `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`;
 
-  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`
+  return `https://economia.awesomeapi.com.br/json/daily/USD-BRL/${qtdDays}`
 }
 
 async function getListCoins(url) {
   let response = await fetch(url);
   let returnApi = await response.json();
-  let selectListQuotations = returnApi.bpi;
+  let selectListQuotations = returnApi;
 
-  const queryCoinsList = Object.keys(selectListQuotations).map((key)=> {
-    return {
-      data: key.split("-").reverse().join("/"),
-      valor: selectListQuotations[key]
-    }
-  })
+  const queryCoinsList = [];
 
-  let data = queryCoinsList.reverse();
+  for (const cotation of selectListQuotations) {
+    const date = new Date(0);
+    date.setUTCSeconds(cotation.timestamp);
+    queryCoinsList.push({
+      valor: cotation.bid,
+      data: date.toDateString()
+    });
+  }
+
+  let data = queryCoinsList;
   return data;
 }
 
 async function getPriceCoinsGraphic(url) {
   let responseG = await fetch(url);
   let returnApiG = await responseG.json();
-  let selectListQuotationsG = returnApiG.bpi;
-  if (returnApiG.bpi && typeof returnApiG.bpi === 'object') {
-    const queryCoinsList = Object.keys(selectListQuotationsG).map((key)=> {
-      return selectListQuotationsG[key]
-    });
-    let dataG = queryCoinsList;
-    return dataG;
+  let selectListQuotationsG = returnApiG;
+  if (Array.isArray(returnApiG) && selectListQuotationsG.length > 0) {
+    const queryCoinsListG = returnApiG.map((cotation) => cotation.bid);
+    return queryCoinsListG.reverse();
+  } else {
+    console.error("API response does not contain valid data.");
+    return [];
   }
 }
 
 export default function App() {
   const[coinsList, setCoinsList] = useState([]);
   const[coinsGraphicList, setCoinsGraphicList] = useState([0]);
-  const[days, setDays] = useState(1220);
+  const[days, setDays] = useState(7);
   const[updateData, setUpdateData] = useState(true);
   const[price, setPrice] = useState();
+  const [dataFetched, setDataFetched] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
-  function updateDay(number){
+  function updateDay(number) {
     setDays(number);
     setUpdateData(true);
   }
 
-  function priceContation() {
-    setPrice(coinsGraphicList.pop())
+  async function priceContation() {
+    if (dataFetched) {
+      setPrice(coinsGraphicList[coinsGraphicList.length - 1]);
+    }
   }
 
-  useEffect(() => {
-    getListCoins(url(days)).then((data) => {
-      setCoinsList(data);
-    });
+  const fetchData = async () => {
+    setIsLoading(true);
 
-    getPriceCoinsGraphic(url(days)).then((dataG) => {
-      setCoinsGraphicList(dataG);
-    });
+    const data = await getListCoins(url(days));
+    setCoinsList(data);
+    setDataFetched(true);
+
+    const dataG = await getPriceCoinsGraphic(url(days));
+    setCoinsGraphicList(dataG);
+    setDataFetched(true);
 
     priceContation();
 
-    if(updateData){
-      setUpdateData(false)
+    if (updateData) {
+      setUpdateData(false);
     }
 
-  },[updateData]);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [updateData]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Open App</Text>
       <StatusBar 
         backgroundColor="#f50d41"
       />
       <CurrentPrice lastCotation={price}/>
-      <HistoryGraphic infoDataGraphic={coinsGraphicList}/>
-      <QuotationList filterDay={updateDay} listTransactions={coinsList}/>
+      {isLoading ? ( // Renderize o indicador de carregamento enquanto isLoading for true
+        <ActivityIndicator size="large" color="#f50d41" />
+      ) : (
+        <>
+          <HistoryGraphic infoDataGraphic={coinsGraphicList}/>
+          <QuotationList filterDay={updateDay} listTransactions={coinsList}/>
+        </>
+      )}
     </SafeAreaView>
   )
 }

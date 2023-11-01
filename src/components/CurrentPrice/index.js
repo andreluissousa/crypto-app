@@ -6,7 +6,7 @@ export function CurrentPrice(props) {
     return(
         <View style={styles.headerPrice}>
             <Text style={styles.currentPrice}>${props.lastCotation}</Text>
-            <Text style={styles.textPrice}>Ultima Cotação</Text>
+            <Text style={styles.textPrice}>Ultima Cotação do Dólar</Text>
         </View>
     )
 }

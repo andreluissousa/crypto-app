@@ -18,7 +18,6 @@ export function HistoryGraphic(props) {
                 width={Dimensions.get("window").width} // from react-native
                 height={220}
                 yAxisLabel="$"
-                yAxisSuffix="k"
                 withVerticalLines={false}
                 yLabelsOffset={1}
                 withVerticalLabels={false}
