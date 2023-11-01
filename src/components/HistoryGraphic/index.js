@@ -27,11 +27,11 @@ export function HistoryGraphic(props) {
                 backgroundGradientFrom: "#1E2923",
                 backgroundGradientTo: "#08130D",
                 backgroundGradientToOpacity: 0.5,
-                decimalPlaces: 2, // optional, defaults to 2dp
+                decimalPlaces: 2,
                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 style: {
-                  borderRadius: 16
+                  borderRadius: 16,
                 },
                 propsForDots: {
                   r: "1",
@@ -41,7 +41,7 @@ export function HistoryGraphic(props) {
               }}
               bezier
               style={{
-                marginVertical: 8,
+                marginVertical: 1,
                 borderRadius: 16
               }}
             />

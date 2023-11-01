@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { View, ScrollView, FlatList, TouchableOpacity, Text } from "react-native";
+import { View, FlatList, TouchableOpacity, Text } from "react-native";
 import styles from "./styles";
 import QuotationItems from "./QuotationItems";
 
