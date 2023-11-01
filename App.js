@@ -21,12 +21,21 @@ async function getListCoins(url) {
     date.setUTCSeconds(cotation.timestamp);
     queryCoinsList.push({
       valor: cotation.bid,
-      data: date.toDateString()
+      data: formatDate(date),
+      pctChange: cotation.pctChange,
     });
   }
 
   let data = queryCoinsList;
   return data;
+}
+
+function formatDate(date) {
+  const day = date.getUTCDate();
+  const month = date.getUTCMonth() + 1; // Adicione 1 porque os meses são zero indexados
+  const year = date.getUTCFullYear();
+
+  return `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
 }
 
 async function getPriceCoinsGraphic(url) {
