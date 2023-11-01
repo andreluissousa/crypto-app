@@ -9,7 +9,7 @@ export default function QuotationItems(props) {
                 <View style={styles.boxLogo}>
                     <Image
                         style={styles.logoBitcoin}
-                        source={require("../../../img/adaptive-icon.jpg")}
+                        source={require("../../../img/adaptive-icon.png")}
                     />
                     <Text style={styles.dayCotation}>{props.data}</Text>
                 </View>
