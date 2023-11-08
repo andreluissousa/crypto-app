@@ -14,7 +14,11 @@
     "react": "18.2.0",
     "react-native": "0.72.6",
     "react-native-chart-kit": "^6.12.0",
-    "react-native-svg": "13.9.0"
+    "react-native-google-mobile-ads": "^12.3.0",
+    "react-native-svg": "13.9.0",
+    "expo-location": "~16.1.0",
+    "expo-dev-client": "~2.4.11",
+    "expo-updates": "~0.18.17"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
