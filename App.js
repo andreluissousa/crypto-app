@@ -3,9 +3,18 @@ import { StyleSheet, Text, StatusBar, SafeAreaView, Platform, ActivityIndicator 
 import { CurrentPrice } from "./src/components/CurrentPrice";
 import { HistoryGraphic } from "./src/components/HistoryGraphic";
 import { QuotationList } from "./src/components/QuotationList";
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
+
+const adUnitId = TestIds.BANNER;
+const adIntentionalId = TestIds.INTERSTITIAL;
+
+const interstitial = InterstitialAd.createForAdRequest(adIntentionalId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
 
 function url(qtdDays) {
-
+  
   return `https://economia.awesomeapi.com.br/json/daily/USD-BRL/${qtdDays}`
 }
 
@@ -13,9 +22,9 @@ async function getListCoins(url) {
   let response = await fetch(url);
   let returnApi = await response.json();
   let selectListQuotations = returnApi;
-
+  
   const queryCoinsList = [];
-
+  
   for (const cotation of selectListQuotations) {
     const date = new Date(0);
     date.setUTCSeconds(cotation.timestamp);
@@ -24,7 +33,7 @@ async function getListCoins(url) {
       data: formatDate(date),
     });
   }
-
+  
   let data = queryCoinsList;
   return data;
 }
@@ -58,6 +67,7 @@ export default function App() {
   const[price, setPrice] = useState();
   const [dataFetched, setDataFetched] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   
   function updateDay(number) {
     setDays(number);
@@ -69,31 +79,38 @@ export default function App() {
       setPrice(coinsGraphicList[coinsGraphicList.length - 1]);
     }
   }
-
+  
   const fetchData = async () => {
     setIsLoading(true);
 
+    interstitial.load();
+    
+    interstitial.addAdEventListener(AdEventType.LOADED, () => {
+      setLoaded(true)
+      interstitial.show();
+    });
+    
     const data = await getListCoins(url(days));
     setCoinsList(data);
     setDataFetched(true);
-
+    
     const dataG = await getPriceCoinsGraphic(url(days));
     setCoinsGraphicList(dataG);
     setDataFetched(true);
-
+    
     priceContation();
-
+    
     if (updateData) {
       setUpdateData(false);
     }
-
+    
     setIsLoading(false);
   };
-
+    
   useEffect(() => {
     fetchData();
   }, [updateData]);
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar 
@@ -108,7 +125,15 @@ export default function App() {
           <QuotationList filterDay={updateDay} listTransactions={coinsList}/>
         </>
       )}
+      <BannerAd 
+        unitId={adUnitId}
+        size={BannerAdSize.BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      />
     </SafeAreaView>
+    
   )
 }
 
