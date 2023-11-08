@@ -10,7 +10,7 @@ const adIntentionalId = TestIds.INTERSTITIAL;
 
 const interstitial = InterstitialAd.createForAdRequest(adIntentionalId, {
   requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
+  keywords: ['Finance', 'Cotation'],
 });
 
 function url(qtdDays) {
