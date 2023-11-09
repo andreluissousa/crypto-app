@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly"
     },
     buttonQuery: {
-        width: 74,
-        height: 30,
+        width: 85,
+        height: 35,
         backgroundColor: "#f50d41",
         borderRadius: 10,
         alignItems: "center",
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     textButtonQuery: {
         color: "#ffffff",
         fontWeight: "bold",
-        fontSize: 16
+        fontSize: 18
     }
 });
 

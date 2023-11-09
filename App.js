@@ -13,6 +13,11 @@ const interstitial = InterstitialAd.createForAdRequest(adIntentionalId, {
   keywords: ['Finance', 'Cotation'],
 });
 
+interstitial.load();
+interstitial.addAdEventListener(AdEventType.LOADED, () => {
+  interstitial.show();
+});
+
 function url(qtdDays) {
   
   return `https://economia.awesomeapi.com.br/json/daily/USD-BRL/${qtdDays}`
@@ -79,16 +84,19 @@ export default function App() {
       setPrice(coinsGraphicList[coinsGraphicList.length - 1]);
     }
   }
-  
+
   const fetchData = async () => {
     setIsLoading(true);
 
-    interstitial.load();
-    
-    interstitial.addAdEventListener(AdEventType.LOADED, () => {
-      setLoaded(true)
-      interstitial.show();
-    });
+    // interstitial.load();
+    // contagemAd++;
+
+    // if(contagemAd <= 1){
+    //   interstitial.addAdEventListener(AdEventType.LOADED, () => {
+    //     setLoaded(true)
+    //     interstitial.show();
+    //   });
+    // }
     
     const data = await getListCoins(url(days));
     setCoinsList(data);

@@ -10,12 +10,6 @@ export function QuotationList(props) {
             <View style={styles.filters}>
                 <TouchableOpacity
                     style={styles.buttonQuery}
-                    onPress={() => daysQuery(7)}
-                >
-                    <Text style={styles.textButtonQuery}>7D</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.buttonQuery}
                     onPress={() => daysQuery(30)}
                 >
                     <Text style={styles.textButtonQuery}>1M</Text>
