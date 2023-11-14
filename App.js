@@ -87,16 +87,6 @@ export default function App() {
 
   const fetchData = async () => {
     setIsLoading(true);
-
-    // interstitial.load();
-    // contagemAd++;
-
-    // if(contagemAd <= 1){
-    //   interstitial.addAdEventListener(AdEventType.LOADED, () => {
-    //     setLoaded(true)
-    //     interstitial.show();
-    //   });
-    // }
     
     const data = await getListCoins(url(days));
     setCoinsList(data);
