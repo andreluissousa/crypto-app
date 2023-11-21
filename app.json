@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Dólar Hoje",
-    "slug": "crypto-app",
-    "version": "1.0.0",
+    "slug": "dolar-hoje",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -29,9 +29,10 @@
     },
     "extra": {
       "eas": {
-        "projectId": "35756a2d-82f5-4601-bb44-1d8fa42dacb3"
+        "projectId": "213398c4-c31d-476c-b2c7-48734cbd3540"
       }
-    }
+    },
+    "owner": "andreborges1777"
   },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-6769657972383152~5898379304"

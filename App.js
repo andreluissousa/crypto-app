@@ -5,10 +5,7 @@ import { HistoryGraphic } from "./src/components/HistoryGraphic";
 import { QuotationList } from "./src/components/QuotationList";
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
 
-const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-6769657972383152~5898379304';
-const adIntentionalId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-6769657972383152~5898379304';
-
-const interstitial = InterstitialAd.createForAdRequest(adIntentionalId, {
+const interstitial = InterstitialAd.createForAdRequest("ca-app-pub-6769657972383152~5898379304", {
   requestNonPersonalizedAdsOnly: true,
   keywords: ['Finance', 'Cotation'],
 });
@@ -124,7 +121,7 @@ export default function App() {
         </>
       )}
       <BannerAd 
-        unitId={adUnitId}
+        unitId="ca-app-pub-6769657972383152~5898379304"
         size={BannerAdSize.BANNER}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true,
