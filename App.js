@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, StatusBar, SafeAreaView, Platform, ActivityIndicator } from "react-native";
+import { StyleSheet, StatusBar, SafeAreaView, Platform, ActivityIndicator } from "react-native";
 import { CurrentPrice } from "./src/components/CurrentPrice";
 import { HistoryGraphic } from "./src/components/HistoryGraphic";
 import { QuotationList } from "./src/components/QuotationList";
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
 
-const interstitial = InterstitialAd.createForAdRequest("ca-app-pub-6769657972383152/4176165720", {
+const InterstitialAdId = __DEV__ ? TestIds : "ca-app-pub-6769657972383152/4176165720"
+const BannerAdId = __DEV__ ? TestIds : "ca-app-pub-6769657972383152/9620064095"
+
+const interstitial = InterstitialAd.createForAdRequest(InterstitialAdId, {
   requestNonPersonalizedAdsOnly: true,
   keywords: ['Finance', 'Cotation'],
 });
@@ -121,7 +124,7 @@ export default function App() {
         </>
       )}
       <BannerAd 
-        unitId="ca-app-pub-6769657972383152/9620064095"
+        unitId={BannerAdId}
         size={BannerAdSize.BANNER}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true,
