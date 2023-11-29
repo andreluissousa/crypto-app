@@ -5,8 +5,8 @@ import { HistoryGraphic } from "./src/components/HistoryGraphic";
 import { QuotationList } from "./src/components/QuotationList";
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
 
-const InterstitialAdId = __DEV__ ? TestIds : "ca-app-pub-6769657972383152/4176165720"
-const BannerAdId = __DEV__ ? TestIds : "ca-app-pub-6769657972383152/9620064095"
+const InterstitialAdId = __DEV__ ? TestIds.INTERSTITIAL : "ca-app-pub-6769657972383152/4176165720"
+const BannerAdId = __DEV__ ? TestIds.BANNER : "ca-app-pub-6769657972383152/9620064095"
 
 const interstitial = InterstitialAd.createForAdRequest(InterstitialAdId, {
   requestNonPersonalizedAdsOnly: true,
