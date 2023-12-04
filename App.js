@@ -4,6 +4,7 @@ import { CurrentPrice } from "./src/components/CurrentPrice";
 import { HistoryGraphic } from "./src/components/HistoryGraphic";
 import { QuotationList } from "./src/components/QuotationList";
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
+import notifee, {AndroidImportance} from '@notifee/react-native';
 
 const InterstitialAdId = __DEV__ ? TestIds.INTERSTITIAL : "ca-app-pub-6769657972383152/4176165720"
 const BannerAdId = __DEV__ ? TestIds.BANNER : "ca-app-pub-6769657972383152/9620064095"
@@ -73,6 +74,30 @@ export default function App() {
   const [dataFetched, setDataFetched] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
+
+  async function displayNotifications() {
+    await notifee.requestPermission();
+
+    const channelId = 'test'; // ChannelId should be a string
+
+    await notifee.createChannel({
+      id: channelId,
+      name: 'sales',
+      vibration: true,
+      importance: AndroidImportance.HIGH,
+    });
+
+    await notifee.displayNotification({
+      id: "7",
+      title: 'O dólar está em alta 🤑 entre no app e confira!',
+      dody: '',
+      android: {
+        channelId,
+        largeIcon: require("./assets/adaptive-icon.png"),
+        circularLargeIcon: true,
+      }
+    })
+  }
   
   function updateDay(number) {
     setDays(number);
@@ -103,6 +128,7 @@ export default function App() {
     }
     
     setIsLoading(false);
+    displayNotifications();
   };
     
   useEffect(() => {

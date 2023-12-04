@@ -9,17 +9,18 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@notifee/react-native": "^7.8.0",
     "expo": "~49.0.15",
+    "expo-dev-client": "~2.4.12",
+    "expo-location": "~16.1.0",
+    "expo-notifications": "~0.20.1",
     "expo-status-bar": "~1.6.0",
+    "expo-updates": "~0.18.17",
     "react": "18.2.0",
     "react-native": "0.72.6",
     "react-native-chart-kit": "^6.12.0",
     "react-native-google-mobile-ads": "^12.3.0",
-    "react-native-svg": "13.9.0",
-    "expo-location": "~16.1.0",
-    "expo-dev-client": "~2.4.12",
-    "expo-updates": "~0.18.17",
-    "expo-notifications": "~0.20.1"
+    "react-native-svg": "13.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
